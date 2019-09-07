@@ -1,2 +1,2 @@
-module FlowerHelper
+module FlowersHelper
 end

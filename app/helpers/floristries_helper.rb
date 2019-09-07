@@ -1,2 +1,2 @@
-module FloristryHelper
+module FloristriesHelper
 end
