@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+run `rake:get_floristries` to seed database with floristries in Boston, Ma
