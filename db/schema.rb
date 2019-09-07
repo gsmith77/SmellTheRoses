@@ -21,7 +21,8 @@ ActiveRecord::Schema.define(version: 2019_09_06_181344) do
 
   create_table "flowers", force: :cascade do |t|
     t.string "name"
-    t.string "color"
+    t.string "image"
+    t.string "description"
     t.integer "owner_id"
     t.integer "floristry_id"
   end
