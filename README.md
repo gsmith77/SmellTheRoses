@@ -24,4 +24,4 @@ Things you may want to cover:
 * ...
 
 
-Run `rake:get_floristries` to seed database with floristries in Boston, Ma
+Run `rake seed_database` to seed database with floristries in Boston, Ma
