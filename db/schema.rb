@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2019_09_06_181344) do
     t.string "last_name"
     t.string "user_name"
     t.string "password_digest"
+    t.string "image"
+    t.string "uid"
   end
 
 end

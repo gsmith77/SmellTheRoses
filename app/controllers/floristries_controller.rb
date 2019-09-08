@@ -1,7 +1,8 @@
 class FloristriesController < ApplicationController
 
     def index
-        binding.pry
         @floristries = Floristry.all
+
+        render json: @floristries
     end
 end

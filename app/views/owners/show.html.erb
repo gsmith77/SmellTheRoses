@@ -1,6 +1,19 @@
+<head>
+    <script type="text/javascript">
+        'app/javascript/model/Floristry.js'
+    </script>
+</head>
+
 <h2><%= @owner.first_name.upcase %>'s Page</h2>
 <%= @owner.first_name %>
 <br>
 <%= @owner.last_name %>
 <br>
 <%= @owner.user_name %>
+
+<button id="show-floristries" onclick="Floristry.prototype.getFloristries()">See Florsitries in Boston</button>
+
+
+<script type="text/javascript">
+    document.getElementById('show-floristries').addEventListener('click', () => { alert('clicked')})
+</script>

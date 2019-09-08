@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
         if auth.present?
             @owner = Owner.find_or_create_by(uid: auth['uid']) do |o|
             o.password = SecureRandom.urlsafe_base64(n=6)
-            o.name = auth['info']['name']
+            o.user_name = auth['info']['email']
+            o.first_name = auth['info']['name'].split(" ")[0]
+            o.last_name = auth['info']['name'].split(" ")[1]
             o.image = auth['info']['image']
             end
             session[:owner_id] = @owner.id
