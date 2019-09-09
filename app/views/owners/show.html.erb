@@ -1,19 +1,103 @@
-<head>
-    <script type="text/javascript">
-        'app/javascript/model/Floristry.js'
-    </script>
-</head>
 
+<div style="text-align:center;">
 <h2><%= @owner.first_name.upcase %>'s Page</h2>
 <%= @owner.first_name %>
 <br>
 <%= @owner.last_name %>
 <br>
 <%= @owner.user_name %>
+<br>
 
-<button id="show-floristries" onclick="Floristry.prototype.getFloristries()">See Florsitries in Boston</button>
+
+
+    <ul id="owners_flowers_list" style="list-style-type: none"> 
+    <% @owner.flowers.each do |flower| %>
+        <li>
+        <%= flower.name %>
+        <br>
+        <p style="float:right;"><%= flower.description %><p>
+        </li>
+        <br>
+    <% end %>
+    </ul>
+
+<div id="floristries" style="list-style-type: none">
+    <ul id="list_of_floristries" style="list-style-type: none"></ul>
+    
+</div>
+    
+<div class="column" id="floristry_flowers">
+    <ul id="list_of_flowers" style="list-style-type: none"></ul>
+
+</div>
+
+<button id="show-floristries">See Florsitries in Boston</button>
+<br>
+<%= link_to 'Empty Garden', flower_path, method: :delete%>
+</div>
+
+
 
 
 <script type="text/javascript">
-    document.getElementById('show-floristries').addEventListener('click', () => { alert('clicked')})
-</script>
+    document.getElementById('show-floristries').addEventListener('click', () => { 
+        fetch('http://localhost:3000/floristries.json')
+        .then(resp => resp.json())
+        .then(floristries => {
+            floristries.forEach(
+                floristry => {
+                    let li = document.createElement('li')
+                    li.id = floristry.id
+                    document.getElementById('list_of_floristries').appendChild(li)
+                    li.innerText = floristry.name
+                }
+            )
+        })
+    })
+
+    var theParent = document.querySelector("#list_of_floristries");
+    theParent.addEventListener("click", getFlowers, false);  
+    
+    
+
+    
+    function getFlowers(e) {
+        if (e.target !== e.currentTarget) {
+            var clickedItem = e.target.id;
+        }
+        e.stopPropagation();
+        
+        fetch('http://localhost:3000/floristries/' + clickedItem + '.json')
+        .then(resp => resp.json())
+        .then(floristry => {
+            floristry.flowers.forEach(flower => {
+                let li = document.createElement('li')
+                li.id = flower.id
+                document.getElementById('list_of_flowers').appendChild(li)
+                li.innerText = flower.name
+                
+            })
+        })
+    }
+    var theParentFlowers = document.querySelector("#list_of_flowers");
+    theParentFlowers.addEventListener("click", doFlowers, false);   
+
+    function doFlowers(e){
+        if (e.target !== e.currentTarget) {
+            var clickedItem = e.target.id;
+            alert("Hello " + clickedItem);
+        }
+        e.stopPropagation();
+
+        var flower_name = e.target.innerText
+        fetch(`http://localhost:3000/flowers/add_to_user?name=` + flower_name)
+        .then(resp => resp.json())
+        .then(flower => {
+            console.log("added flower to Owner's garden")
+            let li = document.createElement('li')
+            document.getElementById('owners_flowers_list').append(li)
+            li.innerText = flower.name + "\n" + flower.description + "\n"
+        })
+
+    }
+    </script>

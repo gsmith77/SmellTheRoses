@@ -5,4 +5,9 @@ class FloristriesController < ApplicationController
 
         render json: @floristries
     end
+
+    def show
+        @floristry = Floristry.find(params[:id])
+        render json: @floristry
+    end
 end
