@@ -90,9 +90,14 @@
         e.stopPropagation();
 
         var flower_name = e.target.innerText
-        fetch(`http://localhost:3000/flowers/add_to_user?name=` + flower_name)
+        fetch('http://localhost:3000/owners/' + <%=current_owner.id %>+ '/add_to_owner?name=' + flower_name)
         .then(resp => resp.json())
         .then(flower => {
+
+        RESEARCH HOW TO CATCH ERROR SINCE FETCH WILL RETURN CODE 500 
+        SINCE CURRENT_OWNER ALREADY CONTAINS THE FLOWER
+
+
             console.log("added flower to Owner's garden")
             let li = document.createElement('li')
             document.getElementById('owners_flowers_list').append(li)

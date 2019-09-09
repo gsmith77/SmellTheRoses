@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   post'signin', to: "sessions#create"
   get 'signin', to: "sessions#new"
   get '/logout', to: 'sessions#destroy', as: "logout"
-  get '/owners/add_flower', to: 'owners#add_flower'
-  get '/flowers/add_to_user', to: 'flowers#add_to_user'
+  get '/owners/:id/add_to_owner', to: 'owners#add_to_owner'
 
   get '/auth/facebook/callback' => 'sessions#create'
 end

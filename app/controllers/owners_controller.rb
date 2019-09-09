@@ -14,6 +14,20 @@ class OwnersController < ApplicationController
         end
     end
 
+        
+    def add_to_owner
+        @flower = Flower.find_by(name: params[:name])
+        binding.pry
+        if !@flower.nil? && current_owner.flowers.include?(@flower) == false
+            current_owner.flowers << @flower
+            current_owner.flowers.uniq
+            render json: @flower, status:201
+        else
+            flash[:alert] = "You already own this plant"
+            redirect_to owner_path(current_owner)
+        end
+    end
+
     def show
         @owner = Owner.find(params[:id])
     end
