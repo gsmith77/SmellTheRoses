@@ -17,7 +17,6 @@ class OwnersController < ApplicationController
         
     def add_to_owner
         @flower = Flower.find_by(name: params[:name])
-        binding.pry
         if !@flower.nil? && current_owner.flowers.include?(@flower) == false
             current_owner.flowers << @flower
             current_owner.flowers.uniq

@@ -94,15 +94,14 @@
         .then(resp => resp.json())
         .then(flower => {
 
-        RESEARCH HOW TO CATCH ERROR SINCE FETCH WILL RETURN CODE 500 
-        SINCE CURRENT_OWNER ALREADY CONTAINS THE FLOWER
+       
 
 
             console.log("added flower to Owner's garden")
             let li = document.createElement('li')
             document.getElementById('owners_flowers_list').append(li)
             li.innerText = flower.name + "\n" + flower.description + "\n"
-        })
+        }).catch(err => alert('Pick another flower, you already have this Flower in your Garden')) 
 
     }
     </script>
