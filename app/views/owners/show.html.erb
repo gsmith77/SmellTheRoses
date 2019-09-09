@@ -31,9 +31,11 @@
 
 </div>
 
-<button id="show-floristries">See Florsitries in Boston</button>
+<button id="show-floristries">See Florsitry in Boston</button>
 <br>
 <%= link_to 'Empty Garden', flower_path, method: :delete%>
+<br>
+<%= link_to "Log Out", logout_path %>
 </div>
 
 
@@ -41,6 +43,7 @@
 
 <script type="text/javascript">
     document.getElementById('show-floristries').addEventListener('click', () => { 
+        document.getElementById('list_of_floristries').innerHTML = ""
         fetch('http://localhost:3000/floristries.json')
         .then(resp => resp.json())
         .then(floristries => {
@@ -66,7 +69,8 @@
             var clickedItem = e.target.id;
         }
         e.stopPropagation();
-        
+        document.getElementById('list_of_flowers').innerHTML = ""
+
         fetch('http://localhost:3000/floristries/' + clickedItem + '.json')
         .then(resp => resp.json())
         .then(floristry => {
@@ -85,7 +89,6 @@
     function doFlowers(e){
         if (e.target !== e.currentTarget) {
             var clickedItem = e.target.id;
-            alert("Hello " + clickedItem);
         }
         e.stopPropagation();
 

@@ -19,7 +19,6 @@ class OwnersController < ApplicationController
         @flower = Flower.find_by(name: params[:name])
         if !@flower.nil? && current_owner.flowers.include?(@flower) == false
             current_owner.flowers << @flower
-            current_owner.flowers.uniq
             render json: @flower, status:201
         else
             flash[:alert] = "You already own this plant"
